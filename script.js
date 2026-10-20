@@ -728,6 +728,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const coordTime = document.getElementById("coord-time");
   const locationPreviewActions = document.getElementById("location-preview-actions");
   const viewMapLink = document.getElementById("view-map-link");
+  const viewGoogleMapsLink = document.getElementById("view-google-maps-link");
   const copyLocationSosBtn = document.getElementById("copy-location-sos-btn");
   const copyFeedbackToast = document.getElementById("copy-feedback-toast");
 
@@ -758,6 +759,11 @@ document.addEventListener("DOMContentLoaded", () => {
       locationStatusText.textContent = isMock
         ? "Status: Loaded sample mock coordinates (India Gate, Delhi)"
         : "Status: Live browser coordinates obtained successfully!";
+    }
+
+    // Set Google Maps link
+    if (viewGoogleMapsLink) {
+      viewGoogleMapsLink.href = `https://www.google.com/maps?q=${lat},${lng}`;
     }
 
     // Set safe free OpenStreetMap link
@@ -898,6 +904,313 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     document.body.removeChild(textArea);
   };
+
+  // ========================================================================
+  // 6B. COMMAND-BASED INTERFACE & CLI CONTROLLER
+  // Enables typing commands to trigger website actions with Enter key support.
+  // ========================================================================
+  const commandForm = document.getElementById("command-form");
+  const commandInput = document.getElementById("command-input");
+  const commandOutput = document.getElementById("command-output");
+  const commandClearBtn = document.getElementById("command-clear-btn");
+  const commandPills = document.querySelectorAll(".cmd-pill");
+
+  /**
+   * Appends a formatted message entry to the command terminal screen.
+   * @param {string} badgeType - CSS badge class modifier (user, system, success, alert, error)
+   * @param {string} badgeText - Short label for the badge
+   * @param {string} contentHtml - HTML content to display inside the entry body
+   */
+  const printCommandEntry = (badgeType, badgeText, contentHtml) => {
+    if (!commandOutput) return;
+
+    const entry = document.createElement("div");
+    entry.className = `cmd-entry ${badgeType}-entry`;
+
+    const badge = document.createElement("span");
+    badge.className = `cmd-badge badge-${badgeType}`;
+    badge.textContent = badgeText;
+
+    const body = document.createElement("div");
+    body.className = "cmd-body";
+    body.innerHTML = contentHtml;
+
+    entry.appendChild(badge);
+    entry.appendChild(body);
+    commandOutput.appendChild(entry);
+
+    // Auto-scroll output to the newest message
+    commandOutput.scrollTop = commandOutput.scrollHeight;
+  };
+
+  /**
+   * Executes a user-typed command string and triggers corresponding actions.
+   * @param {string} rawCommand - Raw command text entered by user
+   */
+  const executeCommand = (rawCommand) => {
+    const trimmed = (rawCommand || "").trim();
+    if (!trimmed) return;
+
+    // Echo the command typed by the user
+    printCommandEntry("user", "USER", `<p><strong>&gt; ${escapeHTML(trimmed)}</strong></p>`);
+
+    const normalized = trimmed.toLowerCase();
+
+    // ----------------------------------------------------------------------
+    // COMMAND 1: HELP
+    // ----------------------------------------------------------------------
+    if (normalized === "help") {
+      const helpHtml = `
+        <p><strong>Supported Commands:</strong></p>
+        <ul class="cmd-list-commands">
+          <li><code>help</code> &mdash; Show all supported commands</li>
+          <li><code>show emergency contacts</code> &mdash; Navigate to the trusted contacts directory</li>
+          <li><code>add emergency contact</code> &mdash; Open and focus the add-contact form</li>
+          <li><code>share my location</code> &mdash; Request browser permission &amp; display coordinates with a Google Maps link (never shared automatically)</li>
+          <li><code>start SOS demo</code> &mdash; Start the existing SOS countdown simulation</li>
+          <li><code>cancel SOS</code> &mdash; Cancel the active SOS countdown</li>
+          <li><code>go home</code> &mdash; Navigate to the home section</li>
+        </ul>
+        <p style="margin-top: 0.35rem; color: #94A3B8; font-size: 0.775rem;">
+          Tip: You can also click the quick suggestion pills below to test commands instantly.
+        </p>
+      `;
+      printCommandEntry("system", "SYSTEM", helpHtml);
+      return;
+    }
+
+    // ----------------------------------------------------------------------
+    // COMMAND 2: SHOW EMERGENCY CONTACTS
+    // ----------------------------------------------------------------------
+    if (normalized === "show emergency contacts") {
+      const targetSection = document.getElementById("contacts-section");
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        targetSection.classList.remove("element-highlight-pulse");
+        void targetSection.offsetWidth; // Reflow for re-triggering animation
+        targetSection.classList.add("element-highlight-pulse");
+      }
+      printCommandEntry(
+        "success",
+        "ACTION",
+        `<p>Navigated to <strong>Trusted Emergency Contacts</strong> section.</p>`
+      );
+      return;
+    }
+
+    // ----------------------------------------------------------------------
+    // COMMAND 3: ADD EMERGENCY CONTACT
+    // ----------------------------------------------------------------------
+    if (normalized === "add emergency contact") {
+      const formCard = document.querySelector(".add-contact-card") || document.getElementById("add-contact-form");
+      const nameField = document.getElementById("contact-name");
+
+      if (formCard) {
+        formCard.scrollIntoView({ behavior: "smooth", block: "center" });
+        formCard.classList.remove("element-highlight-pulse");
+        void formCard.offsetWidth; // Reflow
+        formCard.classList.add("element-highlight-pulse");
+      }
+
+      if (nameField) {
+        setTimeout(() => {
+          nameField.focus();
+        }, 450);
+      }
+
+      printCommandEntry(
+        "success",
+        "ACTION",
+        `<p>Opened <strong>Add Sample Contact</strong> form and focused the full name field. Enter sample details to test.</p>`
+      );
+      return;
+    }
+
+    // ----------------------------------------------------------------------
+    // COMMAND 4: SHARE MY LOCATION
+    // Asks for browser permission, displays coordinates with Google Maps link,
+    // and never transmits or shares automatically.
+    // ----------------------------------------------------------------------
+    if (normalized === "share my location") {
+      if (!("geolocation" in navigator)) {
+        printCommandEntry(
+          "error",
+          "ERROR",
+          `<p>Geolocation is not supported by your current browser environment.</p>`
+        );
+        return;
+      }
+
+      printCommandEntry(
+        "system",
+        "SYSTEM",
+        `<p>Requesting browser location permission... Please grant permission in your browser prompt.</p>`
+      );
+
+      // Explicit user action calls the HTML5 Geolocation API
+      navigator.geolocation.getCurrentPosition(
+        // Success Handler
+        (position) => {
+          const { latitude, longitude, accuracy } = position.coords;
+          const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+          // Synchronize with the on-page location display
+          updateCoordinateDisplay(latitude, longitude, accuracy, false);
+
+          const resultHtml = `
+            <p><strong>Coordinates Retrieved Successfully:</strong></p>
+            <p>&bull; <strong>Latitude:</strong> <code>${latitude.toFixed(5)}</code> &nbsp;|&nbsp; <strong>Longitude:</strong> <code>${longitude.toFixed(5)}</code></p>
+            <p>&bull; <strong>Accuracy:</strong> <code>&plusmn;${Math.round(accuracy)} meters</code></p>
+            <p>
+              <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer" class="cmd-link">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Open Coordinates in Google Maps ↗
+              </a>
+            </p>
+            <p style="color: #94A3B8; font-size: 0.775rem;">
+              🔒 <strong>Privacy Guarantee:</strong> This location is displayed only for you in this browser session. It is never automatically shared, sent, or uploaded to any server.
+            </p>
+          `;
+          printCommandEntry("success", "LOCATION", resultHtml);
+        },
+        // Error Handler
+        (error) => {
+          let errorExplanation = "Unable to retrieve location.";
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errorExplanation = "Location permission was denied in your browser settings. You can grant permission in your browser URL bar or test with sample coordinates in the Location Demo section below.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorExplanation = "Location information is currently unavailable on this device.";
+              break;
+            case error.TIMEOUT:
+              errorExplanation = "Location request timed out. Please try again.";
+              break;
+          }
+
+          printCommandEntry(
+            "error",
+            "DENIED",
+            `<p>${errorExplanation}</p>`
+          );
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+      return;
+    }
+
+    // ----------------------------------------------------------------------
+    // COMMAND 5: START SOS DEMO
+    // ----------------------------------------------------------------------
+    if (normalized === "start sos demo" || normalized === "start sos") {
+      if (sosModal) {
+        sosModal.style.display = "flex";
+        startSosCountdown();
+        addLogEntry("[COMMAND] User initiated SOS demo simulation via Command Center.", "");
+      }
+      printCommandEntry(
+        "alert",
+        "SOS DEMO",
+        `<p><strong>SOS Simulation Started:</strong> 3-second safeguard countdown modal opened on screen.</p>
+         <p style="color: #FCA5A5; font-size: 0.775rem;">Important: This is an educational frontend simulation only. No real alerts or emergency calls are dispatched.</p>`
+      );
+      return;
+    }
+
+    // ----------------------------------------------------------------------
+    // COMMAND 6: CANCEL SOS
+    // ----------------------------------------------------------------------
+    if (normalized === "cancel sos") {
+      closeSosModal();
+      addLogEntry("[COMMAND] SOS simulation countdown cancelled via Command Center.", "");
+      printCommandEntry(
+        "success",
+        "CANCELLED",
+        `<p>SOS countdown has been cancelled and returned to standby.</p>`
+      );
+      return;
+    }
+
+    // ----------------------------------------------------------------------
+    // COMMAND 7: GO HOME
+    // ----------------------------------------------------------------------
+    if (normalized === "go home" || normalized === "home") {
+      const homeSection = document.getElementById("home");
+      if (homeSection) {
+        homeSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      printCommandEntry(
+        "success",
+        "ACTION",
+        `<p>Navigated back to <strong>Home / Welcome</strong> section.</p>`
+      );
+      return;
+    }
+
+    // ----------------------------------------------------------------------
+    // UNKNOWN COMMAND FALLBACK
+    // ----------------------------------------------------------------------
+    printCommandEntry(
+      "error",
+      "UNKNOWN",
+      `<p>Unknown command: <code>"${escapeHTML(trimmed)}"</code>.</p>
+       <p>Type <code>help</code> and press Enter to see all supported commands.</p>`
+    );
+  };
+
+  // Form submission (Enter key or Send button)
+  if (commandForm && commandInput) {
+    commandForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = commandInput.value.trim();
+      if (!text) return;
+      executeCommand(text);
+      commandInput.value = "";
+      commandInput.focus();
+    });
+
+    // Enter key handler
+    commandInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        commandForm.dispatchEvent(new Event("submit"));
+      }
+    });
+  }
+
+  // Clear Terminal Screen button
+  if (commandClearBtn && commandOutput) {
+    commandClearBtn.addEventListener("click", () => {
+      commandOutput.innerHTML = `
+        <div class="cmd-entry system-entry">
+          <span class="cmd-badge badge-system">SYSTEM</span>
+          <div class="cmd-body">
+            <p>Terminal cleared. Type <code>help</code> to view all supported commands.</p>
+          </div>
+        </div>
+      `;
+      if (commandInput) commandInput.focus();
+    });
+  }
+
+  // Quick suggestion pills click handlers
+  commandPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      const cmd = pill.getAttribute("data-cmd");
+      if (cmd && commandInput) {
+        commandInput.value = cmd;
+        commandInput.focus();
+        executeCommand(cmd);
+      }
+    });
+  });
 
   // ========================================================================
   // 7. UTILITY HELPERS

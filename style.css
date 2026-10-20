@@ -526,6 +526,309 @@ button, input, select, textarea {
 }
 
 /* --------------------------------------------------------------------------
+   6B. COMMAND-BASED INTERFACE & CLI TERMINAL
+   -------------------------------------------------------------------------- */
+.command-section {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--border-light);
+  padding: 3.75rem 0;
+}
+
+.command-card {
+  max-width: 860px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--primary-purple-border);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Terminal Title Bar */
+.command-terminal-header {
+  background: linear-gradient(90deg, #1E1B4B 0%, #2E1065 100%);
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(221, 214, 254, 0.2);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.terminal-dots .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red { background-color: #EF4444; }
+.dot-yellow { background-color: #F59E0B; }
+.dot-green { background-color: #10B981; }
+
+.terminal-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #E2E8F0;
+  text-transform: uppercase;
+  font-family: monospace;
+}
+
+.btn-clear-terminal {
+  font-size: 0.75rem;
+  color: #DDD6FE;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.btn-clear-terminal:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+/* Terminal Output Screen */
+.command-output {
+  background-color: #18112C;
+  color: #F8FAFC;
+  padding: 1.25rem;
+  min-height: 200px;
+  max-height: 320px;
+  overflow-y: auto;
+  font-family: 'Consolas', 'Courier New', Courier, monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.command-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.command-output::-webkit-scrollbar-track {
+  background: #110B22;
+}
+
+.command-output::-webkit-scrollbar-thumb {
+  background: #4C1D95;
+  border-radius: 4px;
+}
+
+.cmd-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.cmd-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.badge-user {
+  background-color: var(--accent-pink);
+  color: #FFFFFF;
+}
+
+.badge-system {
+  background-color: #6D28D9;
+  color: #FFFFFF;
+}
+
+.badge-success {
+  background-color: #10B981;
+  color: #FFFFFF;
+}
+
+.badge-alert {
+  background-color: #EF4444;
+  color: #FFFFFF;
+}
+
+.badge-error {
+  background-color: #F59E0B;
+  color: #1E1B4B;
+}
+
+.cmd-body {
+  flex: 1;
+  word-break: break-word;
+}
+
+.cmd-body p {
+  margin-bottom: 0.35rem;
+}
+
+.cmd-body p:last-child {
+  margin-bottom: 0;
+}
+
+.cmd-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #F472B6;
+  font-weight: 700;
+  text-decoration: underline;
+  margin-top: 0.25rem;
+}
+
+.cmd-link:hover {
+  color: #FBCFE8;
+}
+
+.cmd-list-commands {
+  margin-top: 0.4rem;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cmd-list-commands li code {
+  color: #FDF2F8;
+  background-color: rgba(236, 72, 153, 0.25);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* Command Input Form */
+.command-input-form {
+  padding: 1rem 1.25rem;
+  background-color: #FDF2F8;
+  border-top: 1px solid var(--primary-purple-border);
+}
+
+.command-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: #FFFFFF;
+  border: 2px solid var(--primary-purple-border);
+  border-radius: var(--radius-md);
+  padding: 0.3rem 0.5rem 0.3rem 0.85rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.command-input-group:focus-within {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.15);
+}
+
+.cmd-prompt-symbol {
+  font-family: monospace;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--primary-purple);
+  user-select: none;
+}
+
+.command-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.9375rem;
+  color: var(--text-main);
+  background: transparent;
+  padding: 0.45rem 0.25rem;
+}
+
+.command-input::placeholder {
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.command-send-btn {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+}
+
+/* Suggestion Pills */
+.command-suggestions {
+  background-color: #FFFFFF;
+  padding: 0.85rem 1.25rem 1.15rem;
+  border-top: 1px dashed var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.suggestions-label {
+  font-size: 0.775rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.suggestions-pills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cmd-pill {
+  background-color: var(--primary-purple-subtle);
+  border: 1px solid var(--primary-purple-border);
+  color: var(--primary-purple-dark);
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.cmd-pill:hover {
+  background-color: var(--primary-purple);
+  color: #FFFFFF;
+  border-color: var(--primary-purple);
+  transform: translateY(-1px);
+}
+
+/* Highlight pulse for navigated elements */
+.element-highlight-pulse {
+  animation: elementPulse 2.5s ease;
+}
+
+@keyframes elementPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7);
+    outline: 3px solid var(--accent-pink);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(236, 72, 153, 0);
+    outline: 3px solid var(--primary-purple);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+    outline: 3px solid transparent;
+  }
+}
+
+/* --------------------------------------------------------------------------
    7. PROMINENT SOS DEMO BUTTON & SIMULATION LOG
    -------------------------------------------------------------------------- */
 .sos-section {
@@ -1774,6 +2077,25 @@ button, input, select, textarea {
     width: 100%;
   }
 
+  .command-card {
+    border-radius: var(--radius-md);
+  }
+
+  .command-terminal-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .command-input-group {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem;
+  }
+
+  .command-send-btn {
+    width: 100%;
+  }
+
   .location-btn-row {
     flex-direction: column;
   }
@@ -1826,5 +2148,16 @@ button, input, select, textarea {
 
   .report-form-card, .location-card {
     padding: 1.5rem 1.15rem;
+  }
+
+  .command-output {
+    max-height: 240px;
+    padding: 0.85rem;
+    font-size: 0.8125rem;
+  }
+
+  .cmd-pill {
+    font-size: 0.725rem;
+    padding: 0.25rem 0.6rem;
   }
 }

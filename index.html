@@ -57,6 +57,7 @@
       <nav class="primary-nav" id="primary-nav" aria-label="Main Navigation">
         <ul class="nav-list">
           <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#command-section" class="nav-link">Commands</a></li>
           <li><a href="#sos-section" class="nav-link nav-link-sos">SOS Demo</a></li>
           <li><a href="#contacts-section" class="nav-link">Trusted Contacts</a></li>
           <li><a href="#resources-section" class="nav-link">Safety Resources</a></li>
@@ -167,6 +168,88 @@
               <small>📌 Note: Clicking calls directly on phones; prototype remains local.</small>
             </div>
           </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------
+         COMMAND-BASED INTERFACE SECTION
+         Interactive CLI & Command Center to control website actions.
+         -------------------------------------------------------- -->
+    <section class="section command-section" id="command-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag">Interactive CLI &amp; Assistant</span>
+          <h2 class="section-title">Raksha Command Center</h2>
+          <p class="section-subtitle">
+            Control the website using simple typed commands. Type <code>help</code> to view all supported actions, or try <code>show emergency contacts</code>, <code>share my location</code>, and <code>start SOS demo</code>.
+          </p>
+        </div>
+
+        <div class="command-card">
+          <!-- Terminal Header Bar -->
+          <div class="command-terminal-header">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="terminal-title">Nari Raksha Assistant Console &bull; Prototype CLI</div>
+            <button id="command-clear-btn" class="btn-text btn-clear-terminal" type="button" title="Clear console output screen">
+              Clear Terminal
+            </button>
+          </div>
+
+          <!-- Terminal Output Screen -->
+          <div class="command-output" id="command-output" role="log" aria-live="polite">
+            <div class="cmd-entry system-entry">
+              <span class="cmd-badge badge-system">SYSTEM</span>
+              <div class="cmd-body">
+                <p>Welcome to <strong>Nari Raksha Command Center</strong>. Type <code>help</code> and press <kbd>Enter</kbd> or click <strong>Send</strong> to view all supported commands.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Command Input Form with Send Button & Enter Key Support -->
+          <form id="command-form" class="command-input-form" novalidate>
+            <div class="command-input-group">
+              <span class="cmd-prompt-symbol" aria-hidden="true">&gt;</span>
+              <input
+                type="text"
+                id="command-input"
+                class="command-input"
+                placeholder="Type a command (e.g. help, share my location, start SOS demo)..."
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="Website Command Input"
+                required
+              />
+              <button type="submit" id="command-send-btn" class="btn btn-primary command-send-btn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Send
+              </button>
+            </div>
+          </form>
+
+          <!-- Quick Suggestion Action Pills for Easy Mobile & Desktop Tapping -->
+          <div class="command-suggestions">
+            <span class="suggestions-label">Try typing:</span>
+            <div class="suggestions-pills-list">
+              <button type="button" class="cmd-pill" data-cmd="help">help</button>
+              <button type="button" class="cmd-pill" data-cmd="show emergency contacts">show emergency contacts</button>
+              <button type="button" class="cmd-pill" data-cmd="add emergency contact">add emergency contact</button>
+              <button type="button" class="cmd-pill" data-cmd="share my location">share my location</button>
+              <button type="button" class="cmd-pill" data-cmd="start SOS demo">start SOS demo</button>
+              <button type="button" class="cmd-pill" data-cmd="cancel SOS">cancel SOS</button>
+              <button type="button" class="cmd-pill" data-cmd="go home">go home</button>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -653,13 +736,20 @@
 
             <!-- Simulated Map Preview / Share Action -->
             <div class="location-preview-actions" id="location-preview-actions" style="display: none;">
+              <a href="#" id="view-google-maps-link" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                View on Google Maps
+              </a>
               <a href="#" id="view-map-link" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
                   <line x1="8" y1="2" x2="8" y2="18"/>
                   <line x1="16" y1="6" x2="16" y2="22"/>
                 </svg>
-                View on OpenStreetMap (Safe Free Map)
+                View on OpenStreetMap
               </a>
               <button id="copy-location-sos-btn" class="btn btn-outline btn-sm">
                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -708,6 +798,7 @@
         <h4 class="footer-heading">Quick Navigation</h4>
         <ul class="footer-links">
           <li><a href="#home">Home</a></li>
+          <li><a href="#command-section">Command Center</a></li>
           <li><a href="#sos-section">SOS Demo</a></li>
           <li><a href="#contacts-section">Trusted Contacts</a></li>
           <li><a href="#resources-section">Safety Resources</a></li>
