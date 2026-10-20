@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nari Raksha - An educational frontend prototype for women's safety awareness, emergency SOS simulation, safety resources, and incident reporting.">
+  <title>Nari Raksha | Women Safety & Support Prototype</title>
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================================
+       TOP BANNER: EDUCATIONAL PROTOTYPE NOTICE
+       Clearly informs users this is a frontend learning project.
+       ======================================================== -->
+  <div class="prototype-banner" role="alert" aria-label="Learning Prototype Notice">
+    <div class="container banner-content">
+      <span class="banner-badge">Demo Only</span>
+      <p>
+        <strong>Educational Prototype:</strong> This website is a frontend simulation. It <em>does not</em> send real SOS alerts or dial emergency services. In a real emergency, call <strong>112</strong> or your local emergency number immediately.
+      </p>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       HEADER & NAVIGATION BAR
+       Responsive header with logo and navigation links.
+       ======================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container header-container">
+      
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-logo" aria-label="Nari Raksha Home">
+        <div class="logo-icon-wrapper" aria-hidden="true">
+          <!-- Inline SVG Shield & Lotus/Heart Symbol -->
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 8a3 3 0 0 0-3 3c0 2.5 3 5 3 5s3-2.5 3-5a3 3 0 0 0-3-3z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Nari Raksha</span>
+          <span class="brand-subtitle">Empowerment &amp; Safety</span>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Toggle Button -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <!-- Navigation Menu -->
+      <nav class="primary-nav" id="primary-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#sos-section" class="nav-link nav-link-sos">SOS Demo</a></li>
+          <li><a href="#contacts-section" class="nav-link">Trusted Contacts</a></li>
+          <li><a href="#resources-section" class="nav-link">Safety Resources</a></li>
+          <li><a href="#report-section" class="nav-link">Report Incident</a></li>
+          <li><a href="#location-section" class="nav-link">Location Demo</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ========================================================
+       MAIN CONTENT CONTAINER
+       ======================================================== -->
+  <main id="main-content">
+
+    <!-- --------------------------------------------------------
+         1. HERO / WELCOME SECTION
+         -------------------------------------------------------- -->
+    <section class="hero-section" id="home">
+      <div class="container hero-grid">
+        
+        <div class="hero-text-content">
+          <div class="hero-pill-badge">
+            <span class="pulse-dot"></span>
+            Prototype Learning Experience
+          </div>
+          <h1 class="hero-title">
+            Your Safety, Independence &amp; <span class="highlight-gradient">Peace of Mind</span>
+          </h1>
+          <p class="hero-description">
+            Welcome to <strong>Nari Raksha</strong>, a beginner-friendly frontend prototype designed to showcase modern safety tools: simulated one-touch SOS alerts, trusted contact management, emergency guidelines, and browser location features.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#sos-section" class="btn btn-primary btn-large">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="10 8 16 12 10 16 10 8"/>
+              </svg>
+              Try SOS Demo
+            </a>
+            <a href="#resources-section" class="btn btn-secondary btn-large">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+              Safety Resources
+            </a>
+          </div>
+
+          <!-- Feature Highlights Checklist -->
+          <div class="hero-highlights">
+            <div class="highlight-item">
+              <span class="check-icon" aria-hidden="true">&#10003;</span>
+              <span>100% Frontend Only</span>
+            </div>
+            <div class="highlight-item">
+              <span class="check-icon" aria-hidden="true">&#10003;</span>
+              <span>Zero Sensitive Data Stored</span>
+            </div>
+            <div class="highlight-item">
+              <span class="check-icon" aria-hidden="true">&#10003;</span>
+              <span>Clean Vanilla JS &amp; CSS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Card / Quick Helpline Directory -->
+        <div class="hero-card-wrapper">
+          <div class="quick-helpline-card">
+            <div class="quick-card-header">
+              <span class="helpline-badge">Official Real-World Helplines</span>
+              <h3>Need Immediate Help?</h3>
+              <p class="quick-card-sub">In real life emergencies, dial these official numbers from your phone:</p>
+            </div>
+            <ul class="helpline-list">
+              <li class="helpline-item">
+                <div class="helpline-info">
+                  <span class="helpline-name">National Emergency Support</span>
+                  <span class="helpline-desc">Police, Fire, Medical Services</span>
+                </div>
+                <a href="tel:112" class="helpline-chip chip-red" aria-label="Call 112">112</a>
+              </li>
+              <li class="helpline-item">
+                <div class="helpline-info">
+                  <span class="helpline-name">Women Helpline (India)</span>
+                  <span class="helpline-desc">24/7 National Commission for Women</span>
+                </div>
+                <a href="tel:1091" class="helpline-chip chip-purple" aria-label="Call 1091">1091</a>
+              </li>
+              <li class="helpline-item">
+                <div class="helpline-info">
+                  <span class="helpline-name">Women in Distress (Govt)</span>
+                  <span class="helpline-desc">Safety &amp; Family Welfare Support</span>
+                </div>
+                <a href="tel:181" class="helpline-chip chip-pink" aria-label="Call 181">181</a>
+              </li>
+              <li class="helpline-item">
+                <div class="helpline-info">
+                  <span class="helpline-name">Cyber Crime Helpline</span>
+                  <span class="helpline-desc">Online harassment &amp; cyber stalking</span>
+                </div>
+                <a href="tel:1930" class="helpline-chip chip-blue" aria-label="Call 1930">1930</a>
+              </li>
+            </ul>
+            <div class="helpline-card-footer">
+              <small>📌 Note: Clicking calls directly on phones; prototype remains local.</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------
+         2. PROMINENT SOS DEMO BUTTON SECTION
+         -------------------------------------------------------- -->
+    <section class="section sos-section" id="sos-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag">Interactive Simulation</span>
+          <h2 class="section-title">Emergency SOS Demo</h2>
+          <p class="section-subtitle">
+            Experience how modern safety web apps trigger rapid alerts. When clicked, a confirmation modal appears with a 3-second safeguard countdown to simulate real-world alert dispatch.
+          </p>
+        </div>
+
+        <div class="sos-interactive-container">
+          <!-- The Big Animated SOS Button -->
+          <div class="sos-button-wrapper">
+            <div class="sos-glow-ring ring-1"></div>
+            <div class="sos-glow-ring ring-2"></div>
+            <button id="sos-btn" class="sos-main-button" aria-haspopup="dialog" aria-label="Simulate SOS Emergency Alert">
+              <span class="sos-button-badge">DEMO</span>
+              <span class="sos-button-text">SOS</span>
+              <span class="sos-button-sub">Click to Test</span>
+            </button>
+          </div>
+
+          <p class="sos-hint-text">
+            🛡️ <strong>Safety Safeguard:</strong> Clicking will open a confirmation window. You can cancel anytime before the simulation completes.
+          </p>
+
+          <!-- Simulated Live Event Log -->
+          <div class="simulation-log-box" id="simulation-log-box" aria-live="polite">
+            <div class="log-header">
+              <span class="log-title">
+                <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                Simulation Activity Log
+              </span>
+              <button id="clear-log-btn" class="btn-text" title="Clear simulation log">Clear Log</button>
+            </div>
+            <ul id="simulation-log-list" class="log-list">
+              <li class="log-item log-initial">
+                <span class="log-time">System Ready</span>
+                <span class="log-msg">Press the SOS button above to begin the simulated test alert.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------
+         3. TRUSTED CONTACTS SECTION (WITH SAMPLE DATA)
+         -------------------------------------------------------- -->
+    <section class="section contacts-section" id="contacts-section">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-tag">Sample Network</span>
+          <h2 class="section-title">Trusted Emergency Contacts</h2>
+          <p class="section-subtitle">
+            Safety applications notify designated family or friends during emergencies. Below is a sample contacts list. You can add, test, or remove mock contacts in this frontend session.
+          </p>
+        </div>
+
+        <div class="contacts-layout-grid">
+          
+          <!-- Column 1: Contacts Directory -->
+          <div class="contacts-list-container">
+            <div class="contacts-toolbar">
+              <div class="contacts-count">
+                Showing <strong id="contact-count-num">3</strong> Sample Contacts
+              </div>
+              <button id="reset-contacts-btn" class="btn-text btn-reset-contacts">
+                Reset Sample Data
+              </button>
+            </div>
+
+            <!-- Card container for contacts rendered dynamically via script.js -->
+            <div class="contacts-cards-grid" id="contacts-cards-grid" role="region" aria-label="Sample Contacts List">
+              <!-- Dynamically populated by script.js -->
+            </div>
+          </div>
+
+          <!-- Column 2: Add Sample Contact Form -->
+          <div class="add-contact-card">
+            <div class="card-header">
+              <h3 class="card-title">Add Sample Contact</h3>
+              <p class="card-desc">Try adding a mock contact to see dynamic DOM updates in action. Data stays strictly in your browser memory.</p>
+            </div>
+
+            <form id="add-contact-form" class="standard-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name">Full Name <span class="required">*</span></label>
+                <input type="text" id="contact-name" name="name" class="form-control" placeholder="e.g. Maya Verma" required>
+                <span class="field-error" id="name-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-relation">Relationship <span class="required">*</span></label>
+                <select id="contact-relation" name="relation" class="form-control" required>
+                  <option value="">Select relationship...</option>
+                  <option value="Mother">Mother</option>
+                  <option value="Father">Father</option>
+                  <option value="Sister">Sister</option>
+                  <option value="Brother">Brother</option>
+                  <option value="Best Friend">Best Friend</option>
+                  <option value="Colleague / Mentor">Colleague / Mentor</option>
+                  <option value="Other Guardian">Other Guardian</option>
+                </select>
+                <span class="field-error" id="relation-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-phone">Phone Number (Sample) <span class="required">*</span></label>
+                <input type="tel" id="contact-phone" name="phone" class="form-control" placeholder="e.g. +91 98765 43210" required>
+                <small class="form-help">Use a sample format. No real SMS or call will be sent.</small>
+                <span class="field-error" id="phone-error" aria-live="polite"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="8.5" cy="7" r="4"/>
+                  <line x1="20" y1="8" x2="20" y2="14"/>
+                  <line x1="23" y1="11" x2="17" y2="11"/>
+                </svg>
+                Add to Sample List
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------
+         4. SAFETY RESOURCES & SELF-DEFENSE GUIDE
+         -------------------------------------------------------- -->
+    <section class="section resources-section" id="resources-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag">Empowerment Guide</span>
+          <h2 class="section-title">Safety Resources &amp; Legal Rights</h2>
+          <p class="section-subtitle">
+            Knowledge is personal strength. Explore essential everyday safety strategies, legal provisions, and cyber defense tips curated for awareness.
+          </p>
+        </div>
+
+        <!-- Filter / Category Tabs -->
+        <div class="resource-tabs" role="tablist" aria-label="Safety Resources Categories">
+          <button class="tab-btn active" role="tab" aria-selected="true" data-category="all">All Resources</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-category="travel">Commute &amp; Travel</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-category="digital">Digital &amp; Cyber</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-category="legal">Legal Rights</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-category="awareness">Self-Defense</button>
+        </div>
+
+        <!-- Resources Cards Grid -->
+        <div class="resources-grid" id="resources-grid">
+          
+          <!-- Card 1: Commute -->
+          <article class="resource-card" data-category="travel">
+            <div class="resource-icon-wrap icon-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"/>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <span class="resource-tag">Commute Safety</span>
+            <h3 class="resource-title">Safe Night Commute Strategies</h3>
+            <p class="resource-desc">
+              When booking cabs or using public transport late at night, verify license plates before boarding, share your live ride status with a trusted contact, and prefer well-lit main routes.
+            </p>
+            <ul class="resource-tips-list">
+              <li>Check child-lock status before closing vehicle doors.</li>
+              <li>Pre-plan your transit route and keep your phone charged above 30%.</li>
+            </ul>
+          </article>
+
+          <!-- Card 2: Digital Safety -->
+          <article class="resource-card" data-category="digital">
+            <div class="resource-icon-wrap icon-pink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <span class="resource-tag">Cyber Protection</span>
+            <h3 class="resource-title">Digital Stalking &amp; Privacy Shield</h3>
+            <p class="resource-desc">
+              Protect yourself from online stalking and harassment. Regularly audit social media location-tagging, review app background permissions, and never share home addresses publicly.
+            </p>
+            <ul class="resource-tips-list">
+              <li>Turn off automatic metadata (EXIF) sharing on photos.</li>
+              <li>Report cyber harassment directly to national portal <strong>cybercrime.gov.in</strong> or <strong>1930</strong>.</li>
+            </ul>
+          </article>
+
+          <!-- Card 3: Legal Rights -->
+          <article class="resource-card" data-category="legal">
+            <div class="resource-icon-wrap icon-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <span class="resource-tag">Constitutional &amp; Legal</span>
+            <h3 class="resource-title">Right to "Zero FIR" &amp; Legal Aid</h3>
+            <p class="resource-desc">
+              A woman can file a <em>Zero FIR</em> at any police station regardless of jurisdiction if an emergency occurs. The police cannot refuse registration on territorial grounds.
+            </p>
+            <ul class="resource-tips-list">
+              <li>Under Section 160 CrPC, women cannot be summoned to police stations for questioning at night.</li>
+              <li>Free legal services are guaranteed under the Legal Services Authorities Act.</li>
+            </ul>
+          </article>
+
+          <!-- Card 4: Self-Defense & Awareness -->
+          <article class="resource-card" data-category="awareness">
+            <div class="resource-icon-wrap icon-pink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+            <span class="resource-tag">Situational Awareness</span>
+            <h3 class="resource-title">Intuition &amp; Boundary Assertion</h3>
+            <p class="resource-desc">
+              Trust your instincts. If a person or situation feels uncomfortable or unsafe, exit immediately without worrying about politeness. Your personal safety always precedes social courtesy.
+            </p>
+            <ul class="resource-tips-list">
+              <li>Keep hands free and head up when walking in unfamiliar areas.</li>
+              <li>A firm, loud "NO" or "BACK OFF" attracts bystander attention and discourages offenders.</li>
+            </ul>
+          </article>
+
+          <!-- Card 5: Travel Emergency Pack -->
+          <article class="resource-card" data-category="travel">
+            <div class="resource-icon-wrap icon-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <span class="resource-tag">Travel Preparedness</span>
+            <h3 class="resource-title">Everyday Commute Safety Checklist</h3>
+            <p class="resource-desc">
+              Simple habits ensure peace of mind during daily travel to college, coaching classes, or workplaces.
+            </p>
+            <ul class="resource-tips-list">
+              <li>Carry a charged portable power bank and emergency cash.</li>
+              <li>Set up quick-dial or double-tap emergency shortcuts on your smartphone lock screen.</li>
+            </ul>
+          </article>
+
+          <!-- Card 6: Legal Protection -->
+          <article class="resource-card" data-category="legal">
+            <div class="resource-icon-wrap icon-pink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <span class="resource-tag">Workplace Protection</span>
+            <h3 class="resource-title">POSH Act (Workplace Protection)</h3>
+            <p class="resource-desc">
+              The Protection of Women from Sexual Harassment at Workplace (POSH) Act mandates every employer with 10+ staff to establish an Internal Complaints Committee (ICC).
+            </p>
+            <ul class="resource-tips-list">
+              <li>Covers physical, verbal, and electronic forms of workplace misconduct.</li>
+              <li>Complainant identity is strictly safeguarded under non-disclosure clauses.</li>
+            </ul>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------
+         5. INCIDENT REPORTING FORM WITH VALIDATION
+         -------------------------------------------------------- -->
+    <section class="section report-section" id="report-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag">Confidential Prototype</span>
+          <h2 class="section-title">Incident Reporting Demo</h2>
+          <p class="section-subtitle">
+            Test our validated report submission module. All inputs are validated on the client side with friendly hints. No sensitive data is stored, transmitted, or saved to any database.
+          </p>
+        </div>
+
+        <div class="report-form-card">
+          
+          <div class="form-banner-note">
+            <svg class="icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <span><strong>Privacy Notice:</strong> This prototype runs purely inside your browser memory. Nothing submitted here is recorded or transmitted to any server.</span>
+          </div>
+
+          <form id="incident-form" class="incident-form" novalidate>
+            
+            <div class="form-row-2">
+              <!-- Incident Category -->
+              <div class="form-group">
+                <label for="incident-type">Incident Category <span class="required">*</span></label>
+                <select id="incident-type" name="incidentType" class="form-control" required>
+                  <option value="">Select category...</option>
+                  <option value="Street Harassment / Eve Teasing">Street Harassment / Eve Teasing</option>
+                  <option value="Stalking (Physical or Online)">Stalking (Physical or Online)</option>
+                  <option value="Unsafe Transit / Cab Misconduct">Unsafe Transit / Cab Misconduct</option>
+                  <option value="Cyber Harassment / Defamation">Cyber Harassment / Defamation</option>
+                  <option value="Domestic Dispute / Distress">Domestic Dispute / Distress</option>
+                  <option value="Suspicious Activity in Area">Suspicious Activity in Area</option>
+                  <option value="Other Safety Concern">Other Safety Concern</option>
+                </select>
+                <span class="field-error" id="incidentType-error" aria-live="polite"></span>
+              </div>
+
+              <!-- Date & Time of Incident -->
+              <div class="form-group">
+                <label for="incident-date">Date &amp; Time <span class="required">*</span></label>
+                <input type="datetime-local" id="incident-date" name="incidentDate" class="form-control" required>
+                <span class="field-error" id="incidentDate-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <!-- Location / Neighborhood -->
+              <div class="form-group">
+                <label for="incident-location">Location / Area Name <span class="required">*</span></label>
+                <input type="text" id="incident-location" name="incidentLocation" class="form-control" placeholder="e.g. Metro Station Gate 2, Ring Road" required>
+                <span class="field-error" id="incidentLocation-error" aria-live="polite"></span>
+              </div>
+
+              <!-- Optional Urgency Level -->
+              <div class="form-group">
+                <label for="incident-urgency">Severity Level <span class="required">*</span></label>
+                <select id="incident-urgency" name="incidentUrgency" class="form-control" required>
+                  <option value="">Select severity...</option>
+                  <option value="Low - Awareness & Documentation">Low - Awareness &amp; Documentation</option>
+                  <option value="Medium - Persistent Concern">Medium - Persistent Concern</option>
+                  <option value="High - Immediate Hazard">High - Immediate Hazard</option>
+                </select>
+                <span class="field-error" id="incidentUrgency-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <!-- Detailed Description -->
+            <div class="form-group">
+              <label for="incident-description">Incident Details &amp; Observations <span class="required">*</span></label>
+              <textarea id="incident-description" name="incidentDescription" rows="4" class="form-control" placeholder="Please describe what occurred, identifiable clothing, vehicle description, or surroundings (Minimum 20 characters)..." required></textarea>
+              <div class="char-count-wrapper">
+                <span class="char-count" id="char-count">0 / 20 min chars</span>
+              </div>
+              <span class="field-error" id="incidentDescription-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Agreement & Confirmation Checkbox -->
+            <div class="form-group-checkbox">
+              <input type="checkbox" id="incident-consent" name="consent" required>
+              <label for="incident-consent">
+                I understand this is a demonstration learning form and no actual police or emergency response will be generated.
+              </label>
+            </div>
+            <span class="field-error" id="incidentConsent-error" aria-live="polite"></span>
+
+            <!-- Submit Button & Clear -->
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-large">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 2L11 13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Submit Demo Report
+              </button>
+              <button type="reset" id="reset-form-btn" class="btn btn-secondary">
+                Clear Form
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------
+         6. LOCATION-SHARING DEMO (HTML5 GEOLOCATION API)
+         -------------------------------------------------------- -->
+    <section class="section location-section" id="location-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag">HTML5 Geolocation Demo</span>
+          <h2 class="section-title">Location Sharing Simulator</h2>
+          <p class="section-subtitle">
+            Safety systems rely on precise coordinates to guide emergency responders. Try this demo to see how modern browsers request user permission safely.
+          </p>
+        </div>
+
+        <div class="location-card">
+          
+          <div class="location-explanation">
+            <div class="explanation-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div class="explanation-text">
+              <h3>How Geolocation Works in Web Browsers</h3>
+              <p>
+                When you click <strong>"Request Browser Location"</strong>, your browser asks: <em>"Allow Nari Raksha to access your location?"</em> Your location is never accessed without explicit permission.
+              </p>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="location-btn-row">
+            <button id="get-location-btn" class="btn btn-primary">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="3"/>
+                <line x1="12" y1="2" x2="12" y2="4"/>
+                <line x1="12" y1="20" x2="12" y2="22"/>
+                <line x1="2" y1="12" x2="4" y2="12"/>
+                <line x1="20" y1="12" x2="22" y2="12"/>
+              </svg>
+              Request Browser Location
+            </button>
+            <button id="mock-location-btn" class="btn btn-secondary">
+              Use Sample Mock Coordinates (No Permission Needed)
+            </button>
+          </div>
+
+          <!-- Location Status & Display Box -->
+          <div class="location-status-card" id="location-status-card">
+            <div class="location-status-header">
+              <span class="status-indicator-dot" id="location-dot"></span>
+              <span class="status-indicator-text" id="location-status-text">Status: Ready to request location</span>
+            </div>
+
+            <!-- Coordinates Data Grid -->
+            <div class="coordinates-grid">
+              <div class="coord-box">
+                <span class="coord-label">Latitude</span>
+                <span class="coord-val" id="coord-lat">--</span>
+              </div>
+              <div class="coord-box">
+                <span class="coord-label">Longitude</span>
+                <span class="coord-val" id="coord-lng">--</span>
+              </div>
+              <div class="coord-box">
+                <span class="coord-label">Accuracy</span>
+                <span class="coord-val" id="coord-acc">--</span>
+              </div>
+              <div class="coord-box">
+                <span class="coord-label">Timestamp</span>
+                <span class="coord-val" id="coord-time">--</span>
+              </div>
+            </div>
+
+            <!-- Simulated Map Preview / Share Action -->
+            <div class="location-preview-actions" id="location-preview-actions" style="display: none;">
+              <a href="#" id="view-map-link" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+                  <line x1="8" y1="2" x2="8" y2="18"/>
+                  <line x1="16" y1="6" x2="16" y2="22"/>
+                </svg>
+                View on OpenStreetMap (Safe Free Map)
+              </a>
+              <button id="copy-location-sos-btn" class="btn btn-outline btn-sm">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                Copy Simulated Emergency SMS Text
+              </button>
+            </div>
+
+            <!-- Copy Success Toast -->
+            <div id="copy-feedback-toast" class="copy-feedback" role="status" aria-live="polite"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      
+      <div class="footer-col brand-col">
+        <div class="footer-brand">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 8a3 3 0 0 0-3 3c0 2.5 3 5 3 5s3-2.5 3-5a3 3 0 0 0-3-3z"/>
+          </svg>
+          <span class="footer-brand-title">Nari Raksha</span>
+        </div>
+        <p class="footer-tagline">
+          Empowering women with awareness, education, and modern interactive safety prototyping.
+        </p>
+        <div class="footer-tech-stack">
+          <span>HTML5</span> &bull; <span>CSS3</span> &bull; <span>Vanilla JavaScript</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Quick Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#sos-section">SOS Demo</a></li>
+          <li><a href="#contacts-section">Trusted Contacts</a></li>
+          <li><a href="#resources-section">Safety Resources</a></li>
+          <li><a href="#report-section">Incident Reporting</a></li>
+          <li><a href="#location-section">Location Sharing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Emergency Helpline Guide</h4>
+        <ul class="footer-links">
+          <li><strong>112</strong> - All-in-One Emergency</li>
+          <li><strong>1091</strong> - Women Police Helpline</li>
+          <li><strong>181</strong> - Women in Distress Helpline</li>
+          <li><strong>1098</strong> - Childline</li>
+          <li><strong>1930</strong> - National Cyber Crime</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Prototype Notice</h4>
+        <p class="footer-disclaimer">
+          This is an educational frontend project designed for beginners. It does not connect to police databases, SMS gateways, or paid APIs. All data stays local to your browser session.
+        </p>
+        <p class="copyright-text">
+          &copy; <span id="current-year">2026</span> Nari Raksha Prototype. Built for safety awareness &amp; learning.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       MODAL 1: SOS CONFIRMATION & 3-SECOND COUNTDOWN MODAL
+       ======================================================== -->
+  <div class="modal-overlay" id="sos-modal" role="dialog" aria-modal="true" aria-labelledby="sos-modal-title" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-badge-alert">DEMO SOS CONFIRMATION</div>
+      <h3 class="modal-title" id="sos-modal-title">Trigger Emergency SOS Simulation?</h3>
+      
+      <p class="modal-desc">
+        You are about to launch the educational SOS test sequence. In real-world applications, this would broadcast your location to your trusted contacts and local authorities.
+      </p>
+
+      <!-- Countdown Animation Box -->
+      <div class="countdown-container">
+        <div class="countdown-circle">
+          <span id="countdown-number">3</span>
+        </div>
+        <p class="countdown-caption">Simulation automatically proceeds in <span id="countdown-seconds-text">3 seconds</span>...</p>
+      </div>
+
+      <div class="modal-actions">
+        <button id="cancel-sos-btn" class="btn btn-secondary">
+          Cancel Simulation
+        </button>
+        <button id="proceed-sos-btn" class="btn btn-danger">
+          Proceed Immediately (Demo)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 2: INCIDENT REPORT SUBMISSION SUCCESS MODAL
+       ======================================================== -->
+  <div class="modal-overlay" id="report-modal" role="dialog" aria-modal="true" aria-labelledby="report-modal-title" style="display: none;">
+    <div class="modal-card modal-card-success">
+      <div class="modal-success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+
+      <h3 class="modal-title" id="report-modal-title">Demo Report Submitted!</h3>
+      <p class="modal-desc">
+        Your test incident report has been validated and simulated successfully.
+      </p>
+
+      <div class="report-summary-box">
+        <div class="summary-line">
+          <span class="summary-label">Simulated Reference ID:</span>
+          <strong class="summary-val" id="summary-ref-id">NR-DEMO-2026-0001</strong>
+        </div>
+        <div class="summary-line">
+          <span class="summary-label">Category:</span>
+          <span class="summary-val" id="summary-category">Street Harassment</span>
+        </div>
+        <div class="summary-line">
+          <span class="summary-label">Location Area:</span>
+          <span class="summary-val" id="summary-location">Sample Location</span>
+        </div>
+        <div class="summary-line">
+          <span class="summary-label">Privacy Guarantee:</span>
+          <span class="summary-val text-success">Zero data sent to any server</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="close-report-modal-btn" class="btn btn-primary btn-block">
+          Done / Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
